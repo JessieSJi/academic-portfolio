@@ -24,7 +24,7 @@ export function Header() {
           aria-label={`${profile.name} home`}
         >
           <img
-            src="/logo.svg"
+            src="${import.meta.env.BASE_URL}logo.svg"
             alt="Shuang Ji RF Academic logo"
             className="h-8 w-auto min-[390px]:h-8.5 md:h-9"
           />
