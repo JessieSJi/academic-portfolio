@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useLocale } from "../i18n/LocaleContext";
 import { useActiveSection } from "../hooks/useActiveSection";
 
+const logoSrc = `${import.meta.env.BASE_URL}logo.svg`;
+
 export function Header() {
   const { profile, locale, toggleLocale } = useLocale();
   const active = useActiveSection(profile.navItems.map((n) => n.id));
@@ -14,7 +16,7 @@ export function Header() {
       initial={{ y: -12, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      className="sticky top-0 z-50 border-b border-[color:var(--border-soft)]/70 bg-[color:var(--surface-card)]/85 backdrop-blur-xl"
+      className="sticky top-0 z-50 border-b border-[color:var(--border-soft)]/70 bg-[color:var(--surface-card)]/76 backdrop-blur-md"
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 min-[390px]:px-5 md:h-15 md:px-8 xl:px-10">
         <a
@@ -24,7 +26,7 @@ export function Header() {
           aria-label={`${profile.name} home`}
         >
           <img
-            src="${import.meta.env.BASE_URL}logo.svg"
+            src={logoSrc}
             alt="Shuang Ji RF Academic logo"
             className="h-8 w-auto min-[390px]:h-8.5 md:h-9"
           />
@@ -38,7 +40,7 @@ export function Header() {
               className={`rounded-full px-3 py-1.5 text-xs tracking-wide transition ${
                 active === item.id
                   ? "bg-[color:var(--accent-soft)] text-[color:var(--accent-strong)]"
-                  : "text-[color:var(--text-secondary)] hover:bg-[color:var(--surface-soft)] hover:text-[color:var(--accent-strong)]"
+                  : "text-[color:var(--text-secondary)] hover:bg-[color:var(--surface-soft)]/74 hover:text-[color:var(--accent-strong)]"
               }`}
             >
               {item.label}
@@ -56,7 +58,7 @@ export function Header() {
           </button>
           <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[color:var(--surface-chip)] text-[color:var(--text-secondary)] transition hover:bg-[color:var(--surface-soft)] hover:text-[color:var(--accent-strong)] md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[color:var(--surface-chip)] text-[color:var(--text-secondary)] transition hover:bg-[color:var(--surface-soft)]/74 hover:text-[color:var(--accent-strong)] md:hidden"
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
@@ -86,7 +88,7 @@ export function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="overflow-hidden border-t border-[color:var(--border-soft)]/70 bg-[color:var(--surface-card)]/95 md:hidden"
+            className="overflow-hidden border-t border-[color:var(--border-soft)]/70 bg-[color:var(--surface-card)]/84 md:hidden"
             aria-label="Mobile"
           >
             <ul className="flex flex-col gap-1 px-4 py-3 min-[390px]:px-5">
@@ -97,7 +99,7 @@ export function Header() {
                     className={`block rounded-xl px-3 py-2.5 text-sm ${
                       active === item.id
                         ? "bg-[color:var(--accent-soft)] text-[color:var(--accent-strong)]"
-                        : "text-[color:var(--text-secondary)] hover:bg-[color:var(--surface-soft)] hover:text-[color:var(--accent-strong)]"
+                        : "text-[color:var(--text-secondary)] hover:bg-[color:var(--surface-soft)]/74 hover:text-[color:var(--accent-strong)]"
                     }`}
                     onClick={() => setOpen(false)}
                   >

@@ -45,6 +45,7 @@ function SectionShell({
 function AboutSection() {
   const { profile } = useLocale();
   const displayName = profile.name;
+  const profileImageSrc = `${import.meta.env.BASE_URL}profile.jpg`;
 
   return (
     <SectionShell
@@ -77,14 +78,14 @@ function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.45 }}
           transition={{ duration: 0.45 }}
-          className="relative mt-0.5 w-[84px] justify-self-end min-[390px]:mr-3 min-[390px]:w-24 md:mt-0 md:mr-5 md:w-32 xl:mr-6 xl:w-36"
+          className="relative mt-0.5 mr-2 w-[84px] justify-self-end min-[390px]:mr-4 min-[390px]:w-24 md:mt-0 md:mr-6 md:w-32 xl:mr-7 xl:w-36"
         >
           <div className="pointer-events-none absolute -inset-1.5 rounded-full bg-linear-to-br from-cyan-300/40 via-violet-200/44 to-fuchsia-200/58 blur-[6px]" />
           <div className="relative aspect-square overflow-hidden rounded-full bg-[color:var(--surface-card)] shadow-[0_12px_26px_rgba(3,8,16,0.44)]">
             <img
-              src="${import.meta.env.BASE_URL}profile.jpg"
+              src={profileImageSrc}
               alt={profile.about.portraitAlt}
-              className="h-full w-full object-cover object-[center_16%]"
+              className="h-full w-full scale-[1.46] object-cover object-[24%_-15%]"
               loading="eager"
               decoding="async"
             />
@@ -118,7 +119,7 @@ function AboutSection() {
         </div>
         <div className="grid gap-2.5 sm:grid-cols-1">
           {profile.about.stats.map((stat) => (
-            <div key={stat.label} className="surface-card px-3.5 py-2.5">
+            <div key={stat.label} className="surface-card fade-border-box px-3.5 py-2.5">
               <p className="text-lg font-semibold text-[color:var(--accent-strong)]">{stat.value}</p>
               <p className="mt-0.5 text-xs text-[color:var(--text-muted)]">{stat.label}</p>
             </div>
@@ -138,10 +139,13 @@ function EducationSection() {
       title="教育背景"
       subtitle={profile.locale === "zh" ? "科研训练路径" : "Academic Path"}
     >
-      <article className="surface-card px-4 py-3.5 sm:px-5 sm:py-4">
+      <article className="surface-card fade-border-box px-4 py-3.5 sm:px-5 sm:py-4">
         <div className="grid gap-3 md:grid-cols-3 md:gap-4">
           {profile.education.map((item) => (
-            <div key={item.id} className="rounded-lg bg-[color:var(--surface-soft)]/78 px-3 py-2.5 sm:py-3">
+            <div
+              key={item.id}
+              className="relative rounded-lg bg-transparent px-3 py-2.5 after:absolute after:left-1/2 after:-bottom-1 after:h-px after:w-[68px] after:-translate-x-1/2 after:bg-[rgba(232,121,249,0.42)] after:content-[''] last:after:hidden sm:py-3 md:pr-4 md:after:top-1/2 md:after:bottom-auto md:after:left-auto md:after:right-0 md:after:h-[60px] md:after:w-px md:after:translate-x-0 md:after:-translate-y-1/2"
+            >
               <span className="text-xs tracking-wide text-[color:var(--accent)]">{item.period}</span>
               <h3 className="mt-1 text-base font-semibold text-[color:var(--text-primary)] sm:text-[17px]">
                 {item.degree}
@@ -171,7 +175,7 @@ function WorkSection() {
     >
       <div className="space-y-3.5">
         {profile.work.map((item) => (
-          <article key={item.id} className="surface-card p-4 sm:p-5">
+          <article key={item.id} className="surface-card fade-border-box p-4 sm:p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h3 className="text-lg font-semibold text-[color:var(--text-primary)] sm:text-xl">{item.role}</h3>
               <span className="accent-chip rounded-full px-3 py-1 text-xs">
@@ -210,7 +214,7 @@ function ProjectsSection() {
         {profile.projects.map((item) => (
           <article
             key={item.id}
-            className="surface-card p-4 transition hover:-translate-y-0.5 hover:bg-[color:var(--surface-soft)]/82 sm:p-5"
+            className="surface-card fade-border-box p-4 transition hover:-translate-y-0.5 hover:bg-[color:var(--surface-soft)]/70 sm:p-5"
           >
             <h3 className="text-base font-semibold text-[color:var(--text-primary)] sm:text-lg">
               {item.title}
@@ -248,7 +252,7 @@ function PublicationsSection() {
     >
       <div className="grid items-start gap-3.5 md:grid-cols-2">
         {(["期刊", "会议"] as const).map((kind) => (
-          <article key={kind} className="surface-card flex h-full flex-col p-4 sm:p-5">
+          <article key={kind} className="surface-card fade-border-box flex h-full flex-col p-4 sm:p-5">
             {(() => {
               const entries = profile.publicationsPatents.filter((entry) => entry.type === kind);
               const visibleEntries =
@@ -267,7 +271,7 @@ function PublicationsSection() {
                     {visibleEntries.map((item, index) => (
                       <div
                         key={item.id}
-                        className={`rounded-lg bg-[color:var(--surface-soft)]/74 px-2.5 py-2 ${
+                        className={`rounded-lg bg-[color:var(--surface-soft)]/62 px-2.5 py-2 ${
                           index > 0 ? "mt-1.5" : ""
                         }`}
                       >
@@ -345,7 +349,7 @@ function ServiceSection() {
       title="服务与荣誉"
       subtitle={profile.locale === "zh" ? "行业认可" : "Industry Recognition"}
     >
-      <article className="surface-card p-4 sm:p-5">
+      <article className="surface-card fade-border-box p-4 sm:p-5">
         <div className="grid gap-4 md:grid-cols-3 md:gap-5">
           {categoryLabels.map((label) => {
             const groupItems = profile.serviceHonors.filter((item) => item.category === label);
@@ -401,7 +405,7 @@ function LinksSection() {
       title="学术链接"
       subtitle={profile.locale === "zh" ? "公开学术档案" : "Academic Links"}
     >
-      <article className="surface-card p-3 sm:p-3.5">
+      <article className="surface-card fade-border-box p-3 sm:p-3.5">
         <div className="flex flex-wrap gap-2">
           {profile.links.map((item) => (
             <a
@@ -409,17 +413,19 @@ function LinksSection() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex min-w-[220px] grow items-center justify-between gap-2 rounded-lg bg-[color:var(--surface-soft)]/72 px-2.5 py-1.5 transition hover:-translate-y-0.5 hover:bg-[color:var(--surface-soft)]/92 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.26),0_0_14px_rgba(56,189,248,0.14)] sm:min-w-[240px] md:grow-0"
+              className="group flex min-w-[220px] grow items-center gap-1 rounded-lg bg-[color:var(--surface-soft)]/60 px-2.5 py-1.5 transition hover:-translate-y-0.5 hover:bg-[color:var(--surface-soft)]/76 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.26),0_0_14px_rgba(56,189,248,0.14)] sm:min-w-[240px] md:grow-0"
             >
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-[color:var(--text-primary)] group-hover:text-[color:var(--accent-strong)] sm:text-base">
-                  {item.label}
-                </p>
+                <div className="flex items-center gap-1">
+                  <p className="truncate text-sm font-semibold text-[color:var(--text-primary)] group-hover:text-[color:var(--accent-strong)] sm:text-base">
+                    {item.label}
+                  </p>
+                  <span className="shrink-0 text-xs text-[#d946ef] group-hover:text-[#e879f9]">
+                    {profile.locale === "zh" ? "打开 →" : "Open →"}
+                  </span>
+                </div>
                 <p className="truncate text-[11px] text-[color:var(--text-muted)] sm:text-xs">{item.note}</p>
               </div>
-              <span className="shrink-0 text-xs text-[color:var(--accent-violet-strong)]">
-                {profile.locale === "zh" ? "打开 →" : "Open →"}
-              </span>
             </a>
           ))}
         </div>
