@@ -82,7 +82,7 @@ function AboutSection() {
           <div className="pointer-events-none absolute -inset-1.5 rounded-full bg-linear-to-br from-cyan-300/40 via-violet-200/44 to-fuchsia-200/58 blur-[6px]" />
           <div className="relative aspect-square overflow-hidden rounded-full bg-[color:var(--surface-card)] shadow-[0_12px_26px_rgba(3,8,16,0.44)]">
             <img
-              src="/profile.jpg"
+              src="${import.meta.env.BASE_URL}profile.jpg"
               alt={profile.about.portraitAlt}
               className="h-full w-full object-cover object-[center_16%]"
               loading="eager"
